@@ -1,6 +1,7 @@
 //! Cubic Bézier segments.
 
-use std::ops::{Mul, Range};
+use core::ops::{Mul, Range}; ////
+////use std::ops::{Mul, Range};
 
 use crate::MAX_EXTREMA;
 use arrayvec::ArrayVec;

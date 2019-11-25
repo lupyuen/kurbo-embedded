@@ -1,7 +1,9 @@
 //! A 2d point.
 
-use std::fmt;
-use std::ops::{Add, AddAssign, Sub, SubAssign};
+use core::fmt; ////
+////use std::fmt;
+use core::ops::{Add, AddAssign, Sub, SubAssign}; ////
+////use std::ops::{Add, AddAssign, Sub, SubAssign};
 
 use crate::Vec2;
 

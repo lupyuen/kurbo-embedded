@@ -1,7 +1,9 @@
 //! SVG path representation.
 
-use std::f64::consts::PI;
-use std::io::Write;
+use core::f64::consts::PI; ////
+////use std::f64::consts::PI;
+use core::io::Write; ////
+////use std::io::Write;
 
 use crate::{Arc, BezPath, ParamCurve, PathEl, PathSeg, Point, Vec2};
 

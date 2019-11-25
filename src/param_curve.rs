@@ -1,6 +1,7 @@
 //! A trait for curves parametrized by a scalar.
 
-use std::ops::Range;
+use core::ops::Range; ////
+////use std::ops::Range;
 
 use arrayvec::ArrayVec;
 

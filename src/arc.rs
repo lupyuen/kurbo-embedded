@@ -1,7 +1,8 @@
 //! A circle arc.
 
 use crate::{PathEl, Point, Vec2};
-use std::f64::consts::{FRAC_PI_2, PI};
+use core::f64::consts::{FRAC_PI_2, PI}; ////
+////use std::f64::consts::{FRAC_PI_2, PI};
 
 /// A single arc segment.
 #[derive(Clone, Copy, Debug)]

@@ -1,7 +1,9 @@
 //! Implementation of circle shape.
 
-use std::f64::consts::{FRAC_PI_2, PI};
-use std::ops::{Add, Sub};
+use core::f64::consts::{FRAC_PI_2, PI}; ////
+////use std::f64::consts::{FRAC_PI_2, PI};
+use core::ops::{Add, Sub}; ////
+////use std::ops::{Add, Sub};
 
 use crate::{PathEl, Point, Rect, Shape, Vec2};
 
@@ -149,7 +151,7 @@ impl Iterator for CirclePathIter {
 #[cfg(test)]
 mod tests {
     use crate::{Circle, Point, Shape};
-    use std::f64::consts::PI;
+    use core::f64::consts::PI;
 
     fn assert_approx_eq(x: f64, y: f64) {
         // Note: we might want to be more rigorous in testing the accuracy

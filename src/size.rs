@@ -1,8 +1,9 @@
 //! A 2d size.
 
 use crate::Vec2;
-use std::fmt;
-use std::ops::{Mul, MulAssign};
+use core::fmt; ////
+////use std::fmt;
+use core::ops::{Mul, MulAssign};
 
 /// A 2d size.
 #[derive(Clone, Copy, Default, PartialEq)]

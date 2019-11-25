@@ -1,6 +1,7 @@
 //! Lines.
 
-use std::ops::{Mul, Range};
+use core::ops::{Mul, Range}; ////
+////use std::ops::{Mul, Range};
 
 use arrayvec::ArrayVec;
 

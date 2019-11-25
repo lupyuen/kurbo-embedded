@@ -1,6 +1,7 @@
 //! A rectangle.
 
-use std::ops::{Add, Sub};
+use core::ops::{Add, Sub}; ////
+////use std::ops::{Add, Sub};
 
 use crate::{Insets, PathEl, Point, RoundedRect, Shape, Size, Vec2};
 
