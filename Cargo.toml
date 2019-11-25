@@ -14,7 +14,8 @@ categories = ["graphics"]
 features = ["mint"]
 
 [dependencies]
-arrayvec = "0.4.11"
+#### arrayvec = "0.4.11"
+arrayvec = { version = "0.4.11", default-features = false } ####
 
 [dependencies.mint]
 version = "0.5.1"

@@ -18,6 +18,7 @@
 //! vector paths. It is probably most appropriate for creative tools,
 //! but is general enough it might be useful for other applications.
 
+#![no_std] ////
 mod affine;
 mod arc;
 mod bezpath;
