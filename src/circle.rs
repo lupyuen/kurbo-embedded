@@ -65,16 +65,18 @@ impl Shape for Circle {
     type BezPathIter = CirclePathIter;
 
     fn to_bez_path(&self, tolerance: f64) -> CirclePathIter {
-        let scaled_err = self.radius.abs() / tolerance;
+        let scaled_err = libm::fabs(self.radius) / tolerance;
         let (n, arm_len) = if scaled_err < 1.0 / 1.9608e-4 {
             // Solution from http://spencermortensen.com/articles/bezier-circle/
             (4, 0.551915024494)
         } else {
             // This is empirically determined to fall within error tolerance.
-            let n = (1.1163 * scaled_err).powf(1.0 / 6.0).ceil() as usize;
+            let n = libm::ceil(libm::pow(1.1163 * scaled_err, 1.0 / 6.0)) as usize; ////
+            ////let n = (1.1163 * scaled_err).powf(1.0 / 6.0).ceil() as usize;
             // Note: this isn't minimum error, but it is simple and we can easily
             // estimate the error.
-            let arm_len = (4.0 / 3.0) * (FRAC_PI_2 / (n as f64)).tan();
+            let arm_len = (4.0 / 3.0) * libm::tan(FRAC_PI_2 / (n as f64)); ////
+            ////let arm_len = (4.0 / 3.0) * (FRAC_PI_2 / (n as f64)).tan();
             (n, arm_len)
         };
         CirclePathIter {
@@ -88,16 +90,17 @@ impl Shape for Circle {
 
     #[inline]
     fn area(&self) -> f64 {
-        PI * self.radius.powi(2)
+        PI * libm::pow(self.radius, 2 as f64)
     }
 
     #[inline]
     fn perimeter(&self, _accuracy: f64) -> f64 {
-        (2.0 * PI * self.radius).abs()
+        libm::fabs(2.0 * PI * self.radius) ////
+        ////(2.0 * PI * self.radius).fabs()
     }
 
     fn winding(&self, pt: Point) -> i32 {
-        if (pt - self.center).hypot2() < self.radius.powi(2) {
+        if (pt - self.center).hypot2() < libm::pow(self.radius, 2 as f64) {
             1
         } else {
             0
@@ -106,7 +109,7 @@ impl Shape for Circle {
 
     #[inline]
     fn bounding_box(&self) -> Rect {
-        let r = self.radius.abs();
+        let r = libm::fabs(self.radius);
         let (x, y) = self.center.into();
         Rect::new(x - r, y - r, x + r, y + r)
     }
