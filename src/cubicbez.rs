@@ -146,7 +146,8 @@ impl ParamCurveArclen for CubicBez {
             let lc = (c.p3 - c.p0).hypot();
             let lp = (c.p1 - c.p0).hypot() + (c.p2 - c.p1).hypot() + (c.p3 - c.p2).hypot();
 
-            2.56e-8 * (cubic_errnorm(c) / (lc * lc)).powi(8) * lp
+            2.56e-8 * libm::pow(cubic_errnorm(c) / (lc * lc), 8 as f64) * lp ////
+            ////2.56e-8 * (cubic_errnorm(c) / (lc * lc)).powi(8) * lp
         }
         const MAX_DEPTH: usize = 16;
         fn rec(c: &CubicBez, accuracy: f64, depth: usize) -> f64 {
@@ -253,7 +254,8 @@ impl Iterator for ToQuads {
                 let shrink = if t1 == 1.0 && err < 64.0 * self.max_hypot2 {
                     0.5
                 } else {
-                    0.999_999 * (self.max_hypot2 / err).powf(1. / 6.0)
+                    0.999_999 * libm::pow(self.max_hypot2 / err, 1. / 6.0) ////
+                    ////0.999_999 * (self.max_hypot2 / err).powf(1. / 6.0)
                 };
                 t1 = t0 + shrink * (t1 - t0);
             }

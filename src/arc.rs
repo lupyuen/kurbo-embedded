@@ -15,20 +15,29 @@ pub struct Arc {
     pub x_rotation: f64,
 }
 
+fn signum(x: f64) -> f64 { ////
+    if x >= 0 as f64 { 1 as f64 }
+    else { -1 as f64 }
+}
+
 impl Arc {
     /// Create an iterator generating Bezier path elements.
     ///
     /// The generated elemets can be append to an existing bezier path.
     pub fn append_iter(&self, tolerance: f64) -> ArcAppendIter {
-        let sign = self.sweep_angle.signum();
+        let sign = signum(self.sweep_angle); ////
+        ////let sign = self.sweep_angle.signum();
         let scaled_err = self.radii.x.max(self.radii.y) / tolerance;
         // Number of subdivisions per circle based on error tolerance.
         // Note: this may slightly underestimate the error for quadrants.
-        let n_err = (1.1163 * scaled_err).powf(1.0 / 6.0).max(3.999_999);
-        let n = (n_err * self.sweep_angle.abs() * (1.0 / (2.0 * PI))).ceil();
+        let n_err = libm::pow(1.1163 * scaled_err, 1.0 / 6.0).max(3.999_999); ////
+        ////let n_err = (1.1163 * scaled_err).powf(1.0 / 6.0).max(3.999_999);
+        let n = libm::ceil(n_err * libm::fabs(self.sweep_angle) * (1.0 / (2.0 * PI))); ////
+        ////let n = (n_err * self.sweep_angle.abs() * (1.0 / (2.0 * PI))).ceil();
         let angle_step = self.sweep_angle / n;
         let n = n as usize;
-        let arm_len = (4.0 / 3.0) * (0.25 * angle_step).abs().tan() * sign;
+        let arm_len = (4.0 / 3.0) * libm::tan(libm::fabs(0.25 * angle_step)) * sign; ////
+        ////let arm_len = (4.0 / 3.0) * (0.25 * angle_step).abs().tan() * sign;
         let angle0 = self.start_angle;
         let p0 = sample_ellipse(self.radii, self.x_rotation, angle0);
 

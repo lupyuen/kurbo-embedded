@@ -130,10 +130,10 @@ impl ParamCurveArclen for QuadBez {
         }
         let b = 2.0 * d2.dot(d1);
 
-        let sabc = (a + b + c).sqrt();
-        let a2 = a.powf(-0.5);
-        let a32 = a2.powi(3);
-        let c2 = 2.0 * c.sqrt();
+        let sabc = libm::sqrt(a + b + c);
+        let a2 = libm::pow(a, -0.5 as f64);
+        let a32 = libm::pow(a2, 3 as f64);
+        let c2 = 2.0 * libm::sqrt(c);
         let ba_c2 = b * a2 + c2;
 
         let v0 = 0.25 * a2 * a2 * b * (2.0 * sabc - c2) + sabc;
