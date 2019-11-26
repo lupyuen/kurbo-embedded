@@ -1,5 +1,6 @@
 //! A 2d size.
 
+use libm; ////
 use crate::Vec2;
 use core::fmt; ////
 ////use std::fmt;
@@ -53,7 +54,7 @@ impl Size {
     /// integer value.
     #[inline]
     pub fn round(self) -> Size {
-        Size::new(self.width.round(), self.height.round())
+        Size::new(libm::round(self.width), libm::round(self.height))
     }
 }
 

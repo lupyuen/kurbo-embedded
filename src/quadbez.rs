@@ -145,7 +145,8 @@ impl ParamCurveArclen for QuadBez {
             v0 + 0.25
                 * a32
                 * (4.0 * c * a - b * b)
-                * (((2.0 * a + b) * a2 + 2.0 * sabc) / ba_c2).ln()
+                * libm::log(((2.0 * a + b) * a2 + 2.0 * sabc) / ba_c2) ////
+                ////* (((2.0 * a + b) * a2 + 2.0 * sabc) / ba_c2).ln()
         }
     }
 }
