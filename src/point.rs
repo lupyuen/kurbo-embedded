@@ -1,5 +1,6 @@
 //! A 2d point.
 
+use libm; ////
 use core::fmt; ////
 ////use std::fmt;
 use core::ops::{Add, AddAssign, Sub, SubAssign}; ////
@@ -56,7 +57,7 @@ impl Point {
     /// A new `Point`, with each of x and y rounded to the nearest integer value.
     #[inline]
     pub fn round(self) -> Point {
-        Point::new(self.x.round(), self.y.round())
+        Point::new(libm::round(self.x), libm::round(self.y))
     }
 }
 

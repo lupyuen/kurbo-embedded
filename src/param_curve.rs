@@ -1,5 +1,6 @@
 //! A trait for curves parametrized by a scalar.
 
+use libm; ////
 use core::ops::Range; ////
 ////use std::ops::Range;
 
@@ -86,7 +87,8 @@ pub trait ParamCurveArclen: ParamCurve {
         let mut t_last = 0.0;
         let mut t0 = 0.0;
         let mut t1 = 1.0;
-        let n = (-accuracy.log2()).ceil();
+        let n = libm::ceil(-libm::log2(accuracy)); ////
+        ////let n = (-accuracy.log2()).ceil();
         let inner_accuracy = accuracy / n;
         let n = n as usize;
         for i in 0..n {
@@ -100,7 +102,7 @@ pub trait ParamCurveArclen: ParamCurve {
             let arc = self.subsegment(range).arclen(inner_accuracy);
             //println!("tm={}, arc={}, remaining={}", tm, arc, remaining);
             remaining -= arc * dir;
-            if i == n - 1 || (remaining).abs() < accuracy {
+            if i == n - 1 || libm::fabs(remaining) < accuracy {
                 // Allocate remaining arc evenly.
                 return tm + range_size * remaining / arc;
             }
@@ -154,7 +156,8 @@ where
         let d2 = deriv2.eval(t).to_vec2();
         // TODO: What's the convention for sign? I think it should match signed
         // area - a positive area curve should have positive curvature.
-        d2.cross(d) * d.hypot2().powf(-1.5)
+        d2.cross(d) * libm::pow(d.hypot2(), -1.5) ////
+        ////d2.cross(d) * d.hypot2().powf(-1.5)
     }
 }
 

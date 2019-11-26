@@ -1,5 +1,6 @@
 //! A rectangle.
 
+use libm; ////
 use core::ops::{Add, Sub}; ////
 ////use std::ops::{Add, Sub};
 
@@ -237,10 +238,10 @@ impl Rect {
     #[inline]
     pub fn round(self) -> Rect {
         Rect::new(
-            self.x0.round(),
-            self.y0.round(),
-            self.x1.round(),
-            self.y1.round(),
+            libm::round(self.x0),
+            libm::round(self.y0),
+            libm::round(self.x1),
+            libm::round(self.y1),
         )
     }
 
@@ -329,7 +330,8 @@ impl Shape for Rect {
 
     #[inline]
     fn perimeter(&self, _accuracy: f64) -> f64 {
-        2.0 * (self.width().abs() + self.height().abs())
+        2.0 * (libm::fabs(self.width()) + libm::fabs(self.height())) ////
+        ////2.0 * (self.width().abs() + self.height().abs())
     }
 
     /// Note: this function is carefully designed so that if the plane is
