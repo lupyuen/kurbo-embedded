@@ -35,21 +35,26 @@ pub fn solve_cubic(c0: f64, c1: f64, c2: f64, c3: f64) -> ArrayVec<[f64; 3]> {
     if d > 0.0 {
         let sq = libm::sqrt(d); ////
         ////let sq = d.sqrt();
-        let t1 = (r + sq).cbrt() + (r - sq).cbrt();
+        let t1 = libm::cbrt(r + sq) + libm::cbrt(r - sq); ////
+        ////let t1 = (r + sq).cbrt() + (r - sq).cbrt();
         result.push(t1 - x0);
     } else if d == 0.0 {
-        let t1 = -r.cbrt();
+        let t1 = -libm::cbrt(r); ////
+        ////let t1 = -r.cbrt();
         let x1 = t1 - x0;
         result.push(x1);
         result.push(-2.0 * t1 - x0);
     } else {
         let sq = libm::sqrt(-d); ////
         ////let sq = (-d).sqrt();
-        let rho = r.hypot(sq);
-        let th = sq.atan2(r) * (1.0 / 3.0);
-        let cbrho = rho.cbrt();
+        let rho = libm::hypot(r, sq); ////
+        ////let rho = r.hypot(sq);
+        let th = libm::atan2(sq, r) * (1.0 / 3.0); ////
+        ////let th = sq.atan2(r) * (1.0 / 3.0);
+        let cbrho = libm::cbrt(rho); ////
+        ////let cbrho = rho.cbrt();
         let c = libm::cos(th);
-        let ss3 = libm::sin(th) * 3.0f64.sqrt();
+        let ss3 = libm::sin(th) * libm::sqrt(3.0f64);
         result.push(2.0 * cbrho * c - x0);
         result.push(-cbrho * (c + ss3) - x0);
         result.push(-cbrho * (c - ss3) - x0);
@@ -94,7 +99,8 @@ pub fn solve_quadratic(c0: f64, c1: f64, c2: f64) -> ArrayVec<[f64; 2]> {
             return result;
         }
         // See https://math.stackexchange.com/questions/866331
-        -0.5 * (sc1 + arg.sqrt().copysign(sc1))
+        -0.5 * (sc1 + libm::copysign(libm::sqrt(arg), sc1)) ////
+        ////-0.5 * (sc1 + libm::sqrt(arg).copysign(sc1))
     };
     let root2 = sc0 / root1;
     if root2.is_finite() {
