@@ -1,5 +1,6 @@
 //! A circle arc.
 
+use libm; ////
 use crate::{PathEl, Point, Vec2};
 use core::f64::consts::{FRAC_PI_2, PI}; ////
 ////use std::f64::consts::{FRAC_PI_2, PI};
@@ -104,14 +105,14 @@ impl Iterator for ArcAppendIter {
 }
 
 fn sample_ellipse(radii: Vec2, x_rotation: f64, angle: f64) -> Vec2 {
-    let u = radii.x * angle.cos();
-    let v = radii.y * angle.sin();
+    let u = radii.x * libm::cos(angle);
+    let v = radii.y * libm::sin(angle);
     rotate_pt(Vec2::new(u, v), x_rotation)
 }
 
 fn rotate_pt(pt: Vec2, angle: f64) -> Vec2 {
     Vec2::new(
-        pt.x * angle.cos() - pt.y * angle.sin(),
-        pt.x * angle.sin() + pt.y * angle.cos(),
+        pt.x * libm::cos(angle) - pt.y * libm::sin(angle),
+        pt.x * libm::sin(angle) + pt.y * libm::cos(angle),
     )
 }
