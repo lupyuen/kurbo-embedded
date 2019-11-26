@@ -40,7 +40,12 @@ pub trait Shape: Sized {
     /// [`to_bez_path()`](#tymethod.to_bez_path).
     fn into_bez_path(self, tolerance: f64) -> BezPath {
         let vec = if let Some(slice) = self.as_path_slice() {
-            ArrayVec::<PathElArray>::from(slice) ////
+            ////  TODO: Optimise copying into ArrayVec
+            let mut a = ArrayVec::<PathElArray>::new(); ////
+            for el in slice { 
+                a.try_push(*el).expect("BEZ_PATH_SIZE too small")
+            }
+            a ////
             ////Vec::from(slice)
         } else {
             self.to_bez_path(tolerance).collect()

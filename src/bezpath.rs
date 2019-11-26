@@ -16,7 +16,7 @@ use crate::{
 #[derive(Clone, Default, Debug)]
 pub struct BezPath(ArrayVec::<PathElArray>); ////
 pub type PathElArray = [PathEl; BEZ_PATH_SIZE]; ////
-const BEZ_PATH_SIZE: usize = 16; //// Max 16 points supported in a path
+pub const BEZ_PATH_SIZE: usize = 16; //// Max 16 points supported in a path
 ////pub struct BezPath(Vec<PathEl>);
 
 /// The element of a Bézier path.
