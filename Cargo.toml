@@ -15,7 +15,8 @@ features = ["mint"]
 
 [dependencies]
 #### arrayvec = "0.4.11"
-arrayvec = { version = "0.4.11", default-features = false } ####
+arrayvec = { version = "0.5.1", default-features = false } ####
+introsort = { version = "0.6.0", default-features = false } ####
 libm = "0.2.1" ####
 
 [dependencies.mint]

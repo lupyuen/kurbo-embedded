@@ -15,7 +15,7 @@ use crate::{
 /// A path that can Bézier segments up to cubic, possibly with multiple subpaths.
 #[derive(Clone, Default, Debug)]
 pub struct BezPath(ArrayVec::<PathElArray>); ////
-type PathElArray = [PathEl; BEZ_PATH_SIZE]; ////
+pub type PathElArray = [PathEl; BEZ_PATH_SIZE]; ////
 const BEZ_PATH_SIZE: usize = 16; //// Max 16 points supported in a path
 ////pub struct BezPath(Vec<PathEl>);
 

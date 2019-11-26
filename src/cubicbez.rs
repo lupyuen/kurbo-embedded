@@ -3,6 +3,7 @@
 use libm; ////
 use core::ops::{Mul, Range}; ////
 ////use std::ops::{Mul, Range};
+use introsort; ////
 
 use crate::MAX_EXTREMA;
 use arrayvec::ArrayVec;
@@ -205,13 +206,15 @@ impl ParamCurveExtrema for CubicBez {
                 }
             }
         }
-        let mut result = ArrayVec::new();
+        let mut result = ArrayVec::<[f64; MAX_EXTREMA]>::new(); ////
+        ////let mut result = ArrayVec::new();
         let d0 = self.p1 - self.p0;
         let d1 = self.p2 - self.p1;
         let d2 = self.p3 - self.p2;
         one_coord(&mut result, d0.x, d1.x, d2.x);
         one_coord(&mut result, d0.y, d1.y, d2.y);
-        result.sort_by(|a, b| a.partial_cmp(b).unwrap());
+        introsort::sort_by(&mut result, &|a, b| a.partial_cmp(b).unwrap()); ////
+        ////result.sort_by(|a, b| a.partial_cmp(b).unwrap());
         result
     }
 }
