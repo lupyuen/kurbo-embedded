@@ -1,5 +1,6 @@
 //! Implementation of circle shape.
 
+use libm; ////
 use core::f64::consts::{FRAC_PI_2, PI}; ////
 ////use std::f64::consts::{FRAC_PI_2, PI};
 use core::ops::{Add, Sub}; ////
@@ -129,11 +130,11 @@ impl Iterator for CirclePathIter {
         } else if ix <= self.n {
             let th1 = self.delta_th * (ix as f64);
             let th0 = th1 - self.delta_th;
-            let (c0, s0) = (th0.cos(), th0.sin());
+            let (c0, s0) = (libm::cos(th0), libm::sin(th0));
             let (c1, s1) = if ix == self.n {
                 (1.0, 0.0)
             } else {
-                (th1.cos(), th1.sin())
+                (libm::cos(th1), libm::sin(th1))
             };
             Some(PathEl::CurveTo(
                 Point::new(x + r * (c0 - a * s0), y + r * (s0 + a * c0)),
