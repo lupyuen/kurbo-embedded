@@ -14,7 +14,10 @@ use crate::{
 
 /// A path that can Bézier segments up to cubic, possibly with multiple subpaths.
 #[derive(Clone, Default, Debug)]
-pub struct BezPath(Vec<PathEl>);
+pub struct BezPath(ArrayVec::<PathElArray>); ////
+type PathElArray = [PathEl; BEZ_PATH_SIZE]; ////
+const BEZ_PATH_SIZE: usize = 16; //// Max 16 points supported in a path
+////pub struct BezPath(Vec<PathEl>);
 
 /// The element of a Bézier path.
 ///
@@ -43,8 +46,9 @@ impl BezPath {
     }
 
     /// Create a path from a vector of path elements.
-    pub fn from_vec(v: Vec<PathEl>) -> BezPath {
-        BezPath(v)
+    pub fn from_vec(v: ArrayVec::<PathElArray>) -> BezPath { ////
+    ////pub fn from_vec(v: Vec<PathEl>) -> BezPath {
+            BezPath(v)
     }
 
     /// Push a generic path element onto the path.
@@ -504,7 +508,7 @@ impl From<QuadBez> for PathSeg {
 }
 
 impl Shape for BezPath {
-    type BezPathIter = core::vec::IntoIter<PathEl>; ////
+    type BezPathIter = arrayvec::IntoIter<PathElArray>; ////
     ////type BezPathIter = std::vec::IntoIter<PathEl>;
 
     fn to_bez_path(&self, _tolerance: f64) -> Self::BezPathIter {
