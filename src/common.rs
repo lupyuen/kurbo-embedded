@@ -1,5 +1,6 @@
 //! Common mathematical operations
 
+use libm; ////
 use arrayvec::ArrayVec;
 
 /// Find real roots of cubic equation.
@@ -25,12 +26,15 @@ pub fn solve_cubic(c0: f64, c1: f64, c2: f64, c3: f64) -> ArrayVec<[f64; 3]> {
     }
     let (c0, c1, c2) = (scaled_c0, scaled_c1, scaled_c2);
     let q = c1 * (1.0 / 3.0) - c2 * c2 * (1.0 / 9.0); // Q
-    let r = (1.0 / 6.0) * c2 * c1 - (1.0 / 27.0) * c2.powi(3) - c0 * 0.5; // R
-    let d = q.powi(3) + r * r; // D
+    let r = (1.0 / 6.0) * c2 * c1 - (1.0 / 27.0) * libm::pow(c2, 3 as f64) - c0 * 0.5; // R ////
+    ////let r = (1.0 / 6.0) * c2 * c1 - (1.0 / 27.0) * c2.powi(3) - c0 * 0.5; // R
+    let d = libm::pow(q, 3 as f64) + r * r; // D ////
+    ////let d = q.powi(3) + r * r; // D
     let x0 = c2 * (1.0 / 3.0);
     // TODO: handle the cases where these intermediate results overflow.
     if d > 0.0 {
-        let sq = d.sqrt();
+        let sq = libm::sqrt(d); ////
+        ////let sq = d.sqrt();
         let t1 = (r + sq).cbrt() + (r - sq).cbrt();
         result.push(t1 - x0);
     } else if d == 0.0 {

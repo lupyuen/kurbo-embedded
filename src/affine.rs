@@ -1,5 +1,6 @@
 //! Affine transforms.
 
+use libm; ////
 use core::ops::{Mul, MulAssign}; ////
 ////use std::ops::{Mul, MulAssign};
 
@@ -55,8 +56,10 @@ impl Affine {
     /// The angle, `th`, is expressed in radians.
     #[inline]
     pub fn rotate(th: f64) -> Affine {
-        let s = th.sin();
-        let c = th.cos();
+        let s = libm::sin(th);
+        ////let s = th.sin();
+        let c = libm::cos(th);
+        ////let c = th.cos();
         Affine([c, s, -s, c, 0.0, 0.0])
     }
 
