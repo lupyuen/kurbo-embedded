@@ -1,5 +1,6 @@
 //! Cubic Bézier segments.
 
+use libm; ////
 use core::ops::{Mul, Range}; ////
 ////use std::ops::{Mul, Range};
 
@@ -299,7 +300,7 @@ mod tests {
             (2.0 / 3.0, 1.0 / 3.0),
             (1.0, 1.0),
         );
-        let true_arclen = 0.5 * 5.0f64.sqrt() + 0.25 * (2.0 + 5.0f64.sqrt()).ln();
+        let true_arclen = 0.5 * libm::sqrt(5.0f64) + 0.25 * (2.0 + libm::sqrt(5.0f64)).ln();
         for i in 0..12 {
             let accuracy = 0.1f64.powi(i);
             let error = c.arclen(accuracy) - true_arclen;
@@ -317,7 +318,7 @@ mod tests {
             (2.0 / 3.0, 1.0 / 3.0),
             (1.0, 1.0),
         );
-        let true_arclen = 0.5 * 5.0f64.sqrt() + 0.25 * (2.0 + 5.0f64.sqrt()).ln();
+        let true_arclen = 0.5 * libm::sqrt(5.0f64) + 0.25 * (2.0 + libm::sqrt(5.0f64)).ln();
         for i in 0..12 {
             let accuracy = 0.1f64.powi(i);
             let n = 10;

@@ -43,7 +43,8 @@ pub fn solve_cubic(c0: f64, c1: f64, c2: f64, c3: f64) -> ArrayVec<[f64; 3]> {
         result.push(x1);
         result.push(-2.0 * t1 - x0);
     } else {
-        let sq = (-d).sqrt();
+        let sq = libm::sqrt(-d); ////
+        ////let sq = (-d).sqrt();
         let rho = r.hypot(sq);
         let th = sq.atan2(r) * (1.0 / 3.0);
         let cbrho = rho.cbrt();
@@ -221,7 +222,7 @@ mod tests {
     fn test_solve_quadratic() {
         verify(
             solve_quadratic(-5.0, 0.0, 1.0),
-            &[-5.0f64.sqrt(), 5.0f64.sqrt()],
+            &[-libm::sqrt(5.0f64), libm::sqrt(5.0f64)],
         );
         verify(solve_quadratic(5.0, 0.0, 1.0), &[]);
         verify(solve_quadratic(5.0, 1.0, 0.0), &[-5.0]);
