@@ -1,5 +1,6 @@
 //! A simple 2D vector.
 
+use libm; ////
 use core::fmt; ////
 ////use std::fmt;
 use core::ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Sub, SubAssign}; ////
@@ -88,8 +89,8 @@ impl Vec2 {
     #[inline]
     pub fn from_angle(th: f64) -> Vec2 {
         Vec2 {
-            x: th.cos(),
-            y: th.sin(),
+            x: libm::cos(th),
+            y: libm::sin(th),
         }
     }
 
