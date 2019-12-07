@@ -19,6 +19,7 @@
 //! but is general enough it might be useful for other applications.
 
 #![no_std] ////
+#![warn(clippy::all)] ////
 mod affine;
 mod arc;
 mod bezpath;
