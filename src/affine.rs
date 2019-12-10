@@ -8,7 +8,8 @@ use crate::{Point, Rect, Vec2};
 
 /// A 2D affine transform.
 #[derive(Clone, Copy, Debug)]
-pub struct Affine([f64; 6]);
+pub struct Affine(pub [f64; 6]); ////
+////pub struct Affine([f64; 6]);
 
 impl Affine {
     /// A transform that is flipped on the y-axis. Useful for converting between
